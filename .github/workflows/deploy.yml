@@ -1,0 +1,48 @@
+name: Deploy Blog to Server
+
+on:
+  push:
+    branches: [ main ] # 监听 main 分支的变动
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      # 1. 拉取代码
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # 获取所有历史，保证最后修改时间准确
+
+      # 2. 安装 pnpm
+      - name: Install pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 9
+
+      # 3. 设置 Node 环境
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'pnpm'
+
+      # 4. 安装依赖并构建
+      - name: Install and Build
+        run: |
+          pnpm install
+          pnpm docs:build
+        # 注意：VitePress 默认构建产物在 docs/.vitepress/dist
+
+      # 5. 部署到服务器
+      - name: Deploy to Server
+        uses: easingthemes/ssh-deploy@main
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          ARGS: "-rltgoDzvO --delete" # 增量同步，删除服务器上多余旧文件
+          SOURCE: "docs/.vitepress/dist/" # 本地编译好的静态文件路径
+          REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
+          REMOTE_USER: ${{ secrets.REMOTE_USER }}
+          # ⚠️ 必须对应你服务器 Nginx 挂载的目录
+          TARGET: "/home/docker/nginx/html/blog/"
+          EXCLUDE: "/node_modules/"
