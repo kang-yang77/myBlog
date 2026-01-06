@@ -1,4 +1,4 @@
-name: Deploy Blog to Server
+name: Deploy Blog
 
 on:
   push:
@@ -12,37 +12,36 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0 # 获取所有历史，保证最后修改时间准确
+          fetch-depth: 0
 
       # 2. 安装 pnpm
       - name: Install pnpm
-        uses: pnpm/action-setup@v2
+        uses: pnpm/action-setup@v4
         with:
           version: 9
 
-      # 3. 设置 Node 环境
+      # 3. 设置 Node 环境 (关键修改：禁用了缓存！)
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '20'
-          # cache: 'pnpm'
+          # cache: 'pnpm'  <-- ⚠️ 这一行被注释掉了，为了强制修复缓存报错，请不要解开！
 
       # 4. 安装依赖并构建
       - name: Install and Build
         run: |
           pnpm install
           pnpm docs:build
-        # 注意：VitePress 默认构建产物在 docs/.vitepress/dist
+        # VitePress 默认输出目录是 docs/.vitepress/dist
 
       # 5. 部署到服务器
       - name: Deploy to Server
         uses: easingthemes/ssh-deploy@main
-        env:
+        with:  # 👈哪怕这里以前写的是 env，现在请改成 with
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-          ARGS: "-rltgoDzvO --delete" # 增量同步，删除服务器上多余旧文件
-          SOURCE: "docs/.vitepress/dist/" # 本地编译好的静态文件路径
+          ARGS: "-rltgoDzvO --delete"
+          SOURCE: "docs/.vitepress/dist/"
           REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
           REMOTE_USER: ${{ secrets.REMOTE_USER }}
-          # ⚠️ 必须对应你服务器 Nginx 挂载的目录
           TARGET: "/home/docker/nginx/html/blog/"
           EXCLUDE: "/node_modules/"
