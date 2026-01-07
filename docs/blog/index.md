@@ -37,7 +37,8 @@ GitHub Actions 需要一把“钥匙”才能自动进入服务器。
 ### 1. 生成专用密钥对 (在本地电脑生成)
 
 重要提示：必须生成无密码 (-N "") 的密钥，否则自动化脚本会卡住。
-# 生成 ed25519 类型的密钥（比 RSA 更安全且短）
+
+生成 ed25519 类型的密钥（比 RSA 更安全且短）
 ```bash
 ssh-keygen -t ed25519 -f github_deploy_key -C "github-actions" -N ""
 执行后会生成两个文件：
