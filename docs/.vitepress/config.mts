@@ -66,15 +66,6 @@ export default defineConfig({
             { text: 'MySQL 高级特性', link: '/basics/mysql' }
           ]
         }
-      ],
-      // 基础知识侧边栏
-      '/blog/': [
-        {
-          text: '博客构建流程',
-          items: [
-            { text: '构建流程', link: '/blog/index' },
-          ]
-        }
       ]
     },
 
