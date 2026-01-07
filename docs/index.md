@@ -33,6 +33,9 @@ features:
     details: 沉淀 Java 并发编程、JVM 底层原理、MySQL 索引优化与计算机网络核心知识。
     icon: 📖
     link: /basics/index
+
+  - title: 博客建立
+    link: /blog/index
 ---
 
 <style>
