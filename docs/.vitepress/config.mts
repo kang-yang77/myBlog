@@ -18,6 +18,7 @@ export default defineConfig({
       },
       { text: '⚡ 算法心得', link: '/algorithm/index' },
       { text: '📚 基础知识', link: '/basics/index' },
+      { text: '博客构建', link: '/blog/index' },
     ],
 
     // 2. 侧边栏 (为每个模块单独定制)
@@ -66,7 +67,7 @@ export default defineConfig({
           ]
         }
       ],
-            // 基础知识侧边栏
+      // 基础知识侧边栏
       '/blog/': [
         {
           text: '博客构建流程',
