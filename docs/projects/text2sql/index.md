@@ -53,7 +53,7 @@
 
 ## 🏗 系统架构
 
-![系统架构图](docs/images/fig1.png)
+![系统架构图](docs/public/images/fig1.png)
 
 **处理流程：**
 1.  **User Input**: 用户输入自然语言（例如：“查询消费超过 1000 元的用户”）。
