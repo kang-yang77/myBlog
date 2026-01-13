@@ -19,28 +19,23 @@ hero:
 features:
   - title: 短链接系统 (SaaS)
     details: 基于 Spring Boot + Redis + MySQL 构建的高性能短链平台。深度解决海量数据分库分表与布隆过滤器防穿透实战难题。
-    icon: 🚀
     link: /projects/short-link/index
 
   - title:  Text2SQL AI 助手
     details: 探索 LLM 在后端业务中的落地。基于 RAG 技术实现自然语言转 SQL 的自动化执行，集成 LangChain 思想的 Java 极简实现。
-    icon: 🧠
     link: /projects/text2sql/index
 
   - title:  算法通关之路
     details: LeetCode 刷题沉淀与核心算法归纳。包含动态规划、回溯算法、图论等高频考点深度解析与模板总结。
-    icon: 💎
     link: /algorithm/index
 
   - title:  知识体系构建
     details: 沉淀 Java 并发编程、JVM 底层原理、MySQL 索引优化与计算机网络核心知识，构建扎实的后端护城河。
-    icon: 📖
     link: /basics/index
 
   - title:  博客搭建实录
     details: 记录本博客从零搭建的过程，VitePress 配置优化、GitHub Actions 自动化部署与 SEO 优化全记录。
-    icon: 🛠️
-    link: /blog/index
+    link: /blogCreate/index
 ---
 <style>
 :root {
