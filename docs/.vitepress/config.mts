@@ -34,7 +34,7 @@ export default defineConfig({
       },
       { text: '算法心得', link: '/algorithm/index' },
       { text: '基础知识', link: '/basics/index' },
-      { text: '博客搭建', link: '/blog/index' }
+      { text: '博客搭建', link: '/blogCreate/index' }
     ],
     // 社交链接
     socialLinks: [
