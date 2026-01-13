@@ -1,33 +1,16 @@
-# ==========================
-# 1. macOS 系统文件 (最烦人的)
-# ==========================
-.DS_Store
-.AppleDouble
-.LSOverride
-._*
-
-# ==========================
-# 2. Node.js & VitePress (前端依赖和打包产物)
-# ==========================
+# 必须忽略的系统依赖
 node_modules/
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-pnpm-debug.log*
+pnpm-lock.yaml
+yarn.lock
+package-lock.json
 
-# VitePress 打包生成的静态文件，不需要提交
-docs/.vitepress/dist/
-docs/.vitepress/cache/
+# 忽略构建生成的文件
+dist/
+.vitepress/dist
+.vitepress/cache
 
-
-# VS Code
-.vscode/
-*.code-workspace
-
-# ==========================
-# 5. 日志和其他临时文件
-# ==========================
+# 忽略日志和系统文件
 *.log
-tmp/
-temp/
-EOF
+.DS_Store
+.idea/
+.vscode/
