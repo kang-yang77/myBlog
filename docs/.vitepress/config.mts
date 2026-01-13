@@ -1,23 +1,22 @@
 import { defineConfig } from 'vitepress'
 
 export default defineConfig({
-  title: "杨康的技术博客", // 换成你的名字
-  description: "Java后端 | AI落地 | 算法心得",
+  title: "ExitZero_", // 换成你的名字
+  description: "Hello World.",
   base: '/',
 
   themeConfig: {
-    // 1. 顶部导航栏 (关键修改点)
     nav: [
       { text: '首页', link: '/' },
       { 
-        text: '🚀 实战项目', 
+        text: '实战项目', 
         items: [
-          { text: '🔗 短链接系统 (Java)', link: '/projects/short-link/index' },
-          { text: '🤖 Text2SQL 工具 (AI)', link: '/projects/text2sql/index' }
+          { text: '短链接系统', link: '/projects/short-link/index' },
+          { text: ' Text2SQL', link: '/projects/text2sql/index' }
         ]
       },
-      { text: '⚡ 算法心得', link: '/algorithm/index' },
-      { text: '📚 基础知识', link: '/basics/index' },
+      { text: ' 算法心得', link: '/algorithm/index' },
+      { text: '基础知识', link: '/basics/index' },
     ],
 
     // 2. 侧边栏 (为每个模块单独定制)

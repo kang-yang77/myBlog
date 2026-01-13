@@ -2,9 +2,9 @@
 layout: home
 
 hero:
-  name: "杨康的开发笔记"
-  text: "Java 后端与 AI 的融合"
-  tagline: " 探索高并发架构 |  落地 LLM 应用 |  精进核心算法"
+  name: "Yang Kang's Code"
+  text: "Keep Coding, Keep Evolving."
+  tagline: "while(alive) { learn(); build(); share(); }"
   # image:
   #   # src: /logo.png # 建议放一个透明底的 Logo 或 AI 相关的 3D 图标，如果没有图片，可以先注释掉这行
   #   alt: Logo
@@ -42,23 +42,20 @@ features:
     icon: 🛠️
     link: /blog/index
 ---
-
 <style>
 :root {
-  /* ⚡️ 核心变量：修改这里可以改变整体色调 */
+  /* ⚡️ 核心变量 */
   --vp-home-hero-name-color: transparent;
   --vp-home-hero-name-background: -webkit-linear-gradient(120deg, #bd34fe 30%, #41d1ff);
   --vp-home-hero-image-background-image: linear-gradient(-45deg, #bd34fe 50%, #47caff 50%);
   --vp-home-hero-image-filter: blur(40px);
 }
 
-/* 1. Hero 区域文字渐变增强 */
 .vp-doc h1 { 
     font-weight: 800; 
     letter-spacing: -1.5px;
 }
 
-/* 2. 背景增加科技感网格纹理 */
 .VPContent {
     background-image: 
         radial-gradient(transparent 1px, var(--vp-c-bg) 1px),
@@ -68,7 +65,6 @@ features:
     background-position: center top;
 }
 
-/* 暗黑模式下的背景微调 */
 .dark .VPContent {
     background-image: 
         radial-gradient(rgba(255,255,255,0.1) 1px, transparent 1px),
@@ -76,7 +72,7 @@ features:
         linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
 }
 
-/* 3. Hero 图片悬浮呼吸动画 */
+/* Hero 图片悬浮呼吸动画 */
 .image-src {
     animation: float 6s ease-in-out infinite;
 }
@@ -87,19 +83,18 @@ features:
     100% { transform: translateY(0px); }
 }
 
-/* 4. Feature 卡片极客风改造 */
 .VPFeature {
     transition: all 0.3s ease-in-out !important;
     border: 1px solid rgba(189, 52, 254, 0.1);
-    background: rgba(255, 255, 255, 0.02); /* 轻微透明 */
-    backdrop-filter: blur(10px); /* 毛玻璃 */
+    background: rgba(255, 255, 255, 0.02);
+    backdrop-filter: blur(10px);
     border-radius: 12px;
 }
 
 .VPFeature:hover {
     transform: translateY(-5px);
-    border-color: #bd34fe; /* 悬停边框变紫 */
-    box-shadow: 0 8px 20px -5px rgba(189, 52, 254, 0.3); /* 紫色光晕 */
+    border-color: #bd34fe;
+    box-shadow: 0 8px 20px -5px rgba(189, 52, 254, 0.3);
     background: linear-gradient(145deg, rgba(255,255,255,0.05) 0%, rgba(189,52,254,0.05) 100%);
 }
 
@@ -110,15 +105,33 @@ features:
     font-size: 24px;
 }
 
-/* 5. 按钮样式增强 */
+
+/* 主按钮 (brand)：实心渐变 */
 .action .brand {
     background: linear-gradient(to right, #bd34fe, #41d1ff) !important;
     border: none !important;
+    color: white !important; /* 强制白字 */
     box-shadow: 0 4px 15px rgba(65, 209, 255, 0.4);
     transition: all 0.3s;
 }
 .action .brand:hover {
     box-shadow: 0 6px 20px rgba(189, 52, 254, 0.6);
+    transform: scale(1.05);
+}
+
+/* 次按钮 (alt)：磨砂玻璃 + 霓虹边框 */
+.action .alt {
+    background: rgba(255, 255, 255, 0.05) !important; /* 微透明背景 */
+    border: 1px solid rgba(189, 52, 254, 0.5) !important; /* 紫色半透明边框 */
+    color: var(--vp-c-text-1) !important; /* 跟随主题文字颜色 */
+    backdrop-filter: blur(5px); /* 毛玻璃 */
+    transition: all 0.3s;
+}
+
+.action .alt:hover {
+    border-color: #41d1ff !important; /* 悬停变蓝 */
+    background: rgba(189, 52, 254, 0.1) !important; /* 背景微微变紫 */
+    box-shadow: 0 0 15px rgba(189, 52, 254, 0.3); /* 发光 */
     transform: scale(1.05);
 }
 </style>
