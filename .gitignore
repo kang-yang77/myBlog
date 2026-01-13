@@ -1,0 +1,16 @@
+# 必须忽略的系统依赖
+node_modules/
+pnpm-lock.yaml
+yarn.lock
+package-lock.json
+
+# 忽略构建生成的文件
+dist/
+.vitepress/dist
+.vitepress/cache
+
+# 忽略日志和系统文件
+*.log
+.DS_Store
+.idea/
+.vscode/
