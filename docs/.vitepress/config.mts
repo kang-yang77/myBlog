@@ -46,8 +46,9 @@ export default defineConfig({
     
     // 页脚
     footer: {
-      message: 'Talk is cheap, show me the code.',
-      copyright: 'Copyright © 2026 ExitZero'
+      message: 'Hello World!!.',
+      // 在 copyright 中使用 HTML 标签添加备案号并链接到工信部
+      copyright: 'Copyright © 2026 ExitZero | <a href="https://beian.miit.gov.cn/" target="_blank" rel="noreferrer">蜀ICP备2026002075号</a>'
     }
   },
   

@@ -8,7 +8,7 @@
 
 ## 在线体验地址
 
-<!-- - [项目地址](http://117.72.41.145/text2sql/) -->
+<!-- - [项目地址](https://exitzero.tech/text2sql/) -->
 
 
 
