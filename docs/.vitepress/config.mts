@@ -48,7 +48,7 @@ export default defineConfig({
     footer: {
       message: 'Hello World!!.',
       // 在 copyright 中使用 HTML 标签添加备案号并链接到工信部
-      copyright: 'Copyright © 2026 ExitZero | <a href="https://beian.miit.gov.cn/" target="_blank" rel="noreferrer">蜀ICP备2026002075号</a>'
+      copyright: 'Copyright © 2026 ExitZero | <img src="https://beian.miit.gov.cn/favicon.ico" style="width: 16px; height: 16px; vertical-align: middle; margin-right: 3px;" /> <a href="https://beian.miit.gov.cn/" target="_blank" rel="noreferrer">蜀ICP备2026002075号</a>'
     }
   },
   
