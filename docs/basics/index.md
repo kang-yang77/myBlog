@@ -1,4 +1,89 @@
-# Java 后端知识体系
+# Java 后端相关知识总结
+
+## Spring相关
+### 一、 Web 容器 (Servlet Containers)
+* **Tomcat**
+    * **定位**：Spring Boot 默认容器，成熟稳定，文档丰富。
+    * **适用**：大多数传统的企业级 Web 应用。
+* **Undertow**
+    * **定位**：性能怪兽，基于 NIO（非阻塞），启动快，内存占用低。
+    * **适用**：高并发场景，微服务架构。
+* **Jetty**
+    * **定位**：长连接专家，架构灵活。
+    * **适用**：WebSocket、即时通讯 (IM)、聊天系统。
+
+---
+
+### 二、 Spring Boot 核心原理
+#### 1. 启动类注解 `@SpringBootApplication`
+它是一个复合注解，包含三个核心：
+* **`@SpringBootConfiguration`**：标识这是主配置类。
+* **`@ComponentScan`**：自动扫描当前包及其子包下的组件（Bean）。
+* **`@EnableAutoConfiguration`**：**核心**。开启自动配置机制。
+
+#### 2. 自动配置原理 (SPI 机制)
+* **加载**：启动时扫描所有 jar 包下的 `META-INF/spring.factories` 文件。
+* **筛选**：利用 `@Conditional` 系列注解（如 `@ConditionalOnClass`）进行判断。
+    * *只有当 classpath 下存在指定的类（依赖）且用户未手动配置 Bean 时，自动配置类才生效。*
+* **注册**：将符合条件的默认配置加载到 Spring 容器中（如自动配置 DataSource）。
+
+#### 3. 配置文件优先级
+遵循 **“外层覆盖内层，具体覆盖通用”** 原则：
+1.  **命令行参数** (`--server.port=8888`) [优先级最高]
+2.  **Jar 包外部** 的配置文件 (`config/application.yml`)
+3.  **Jar 包内部** 的配置文件 (`src/main/resources/application.yml`)
+4.  **带环境后缀** 的配置 (`application-dev.yml`) > **通用** 配置 (`application.yml`)
+
+#### 4. 多环境管理 (Profiles)
+* **最佳实践**：使用多文件隔离 (`application-dev.yml`, `application-prod.yml`)。
+* **切换方式**：
+    * 开发时：在 `application.yml` 设置 `spring.profiles.active=dev`。
+    * **生产时**：启动命令指定 `java -jar app.jar --spring.profiles.active=prod`。
+
+---
+
+### 三、 Spring 常用注解体系
+#### 1. Bean 定义 (类级别)
+* **`@Component`**：通用组件（打杂的）。
+* **`@Repository`**：持久层/DAO（管仓库的），支持数据库异常翻译。
+* **`@Service`**：业务层（经理），通常在此处开启事务。
+* **`@Controller`**：MVC 控制层（传统前台），返回页面。
+* **`@RestController`**：`@Controller` + `@ResponseBody`，直接返回数据 (JSON)，适用于前后端分离。
+
+#### 2. 依赖注入
+* **`@Autowired`**：Spring 提供，自动按类型注入 Bean。
+
+#### 3. HTTP 请求传参
+* **`@RequestParam`**：获取 URL 查询参数 (`?name=tom`)。
+* **`@PathVariable`**：获取 URL 路径参数 (`/user/{id}`)。
+* **`@RequestBody`**：获取 POST 请求体中的 JSON 数据，并自动映射为 Java 对象。
+
+---
+
+### 四、 Spring 核心思想 (IOC & AOP)
+#### 1. IOC (控制反转) & DI (依赖注入)
+* **概念**：将对象的创建权和管理权从代码移交给 Spring 容器。
+* **目的**：**解耦**。修改依赖实现时无需修改业务代码，只需调整配置。
+
+#### 2. AOP (面向切面编程)
+* **概念**：将横切关注点（日志、事务、权限）与核心业务逻辑分离。
+* **实现**：基于动态代理（JDK 代理或 CGLIB）。
+* **应用**：声明式事务 (`@Transactional`) 是最典型的应用。
+
+---
+
+### 五、 事务管理 (Transaction)
+#### 1. 本地事务失效场景 (`@Transactional`)
+* **自调用**：同一类内部方法直接调用 (`this.method()`)，绕过了代理对象。
+* **异常被吞**：业务代码手动 `try-catch` 了异常且未抛出，AOP 无法捕获异常。
+* **异常类型不匹配**：默认只回滚 `RuntimeException`，若抛出 Checked Exception (如 `IOException`) 需配置 `rollbackFor = Exception.class`。
+* **权限限制**：方法非 `public`。
+
+#### 2. 分布式事务解决方案
+* **2PC (两阶段提交)**：强一致性，但性能差，资源锁定时间长。
+* **TCC (Try-Confirm-Cancel)**：性能好，但代码侵入性高（需实现三个方法）。
+* **Seata (AT模式)**：阿里开源，对业务无侵入，利用 Undo Log 实现回滚，适合大多数企业场景。
+* **最终一致性 (基于 MQ)**：高并发首选。允许短暂数据不一致，通过消息队列异步重试，保证最终结果正确。
 
 ## Mysql
 
