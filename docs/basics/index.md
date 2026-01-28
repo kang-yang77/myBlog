@@ -1,7 +1,69 @@
 # Java 后端相关知识总结
 
-## Spring相关
-### 一、 Web 容器 (Servlet Containers)
+## Spring
+
+### Spring 是什么？
+Spring 是为了解决企业级应用开发的复杂性而诞生的。它的出现是为了替代繁琐的 **EJB**（Enterprise JavaBean）。
+
+#### 核心两大特性
+1.  **IoC (控制反转) / DI (依赖注入)**：
+    * **解释**：将对象的创建权和管理权从开发者手中交接给 Spring 容器。
+    * **好处**：实现代码解耦。
+2.  **AOP (面向切面编程)**：
+    * **解释**：将与业务无关的通用功能（如日志、事务、权限）抽取出来，在不修改源码的情况下横向切入到业务方法中。
+
+#### Spring 的缺点与进化
+* **早期痛点**：“配置地狱”（Configuration Hell）。开发者需要编写和维护大量的 XML 配置文件。
+* **中期痛点**：依赖管理混乱，第三方库版本冲突严重。
+* **解决方案**：**Spring Boot** 的诞生完美解决了上述问题。
+
+### SpringBoot的优势
+1.  **开发效率高**：告别繁琐 XML，开箱即用。
+2.  **生态集成**：与 Spring Data, Security 等无缝整合。
+3.  **约定优于配置**：通过合理的默认配置，减少手动操作。
+4.  **内嵌容器**：**自带 Tomcat/Jetty**，无需单独安装服务器，直接运行 jar 包。
+5.  **微服务基石**：适合构建独立的微服务应用。
+6.  **构建工具支持**：Maven/Gradle 插件简化打包（直接打成可执行 jar）。
+7.  **生产级监控**：**Actuator** 模块提供系统健康检查、指标收集。
+
+### Starter（起步依赖）
+* 避免了复杂的 Maven 依赖列表。
+* **解决了 Jar 包版本冲突问题**。
+* **示例**：`spring-boot-starter-web` 包含了 Spring MVC, Tomcat, Jackson 等。
+
+###  默认日志框架
+* **架构**：**SLF4J** (接口层) + **Logback** (实现层)。
+* **实战推荐**：使用 Lombok 的 **`@Slf4j`** 注解。
+* **替换方案**：如果需要 Log4j2，需在 pom 中先排除 `logging` starter，再引入 `log4j2` starter。
+
+###  参数校验 (Validation)
+使用 JSR-303/JSR-380 标准，配合 Hibernate Validator。
+
+* **常用注解**：
+    * `@NotNull`: 不能为 null（由于空字符串不为 null，String 类型慎用）。
+    * `@NotBlank`: **String 必填专用**（防 null 和空字符串）。
+    * `@Min`/`@Max`: 数字范围。
+    * `@Email`: 邮箱格式。
+* **开启校验**：在 Controller 方法参数前加 **`@Validated`**。
+* **进阶：分组校验**
+    * **场景**：新增用户 ID 必须为空，更新用户 ID 必须不为空。
+    * **实现**：定义接口 `CreateGroup`, `UpdateGroup`，在 DTO 注解中指定 `groups`，在 Controller 中通过 `@Validated(CreateGroup.class)` 激活。
+* **进阶：自定义注解**
+    * 实现 `ConstraintValidator` 接口编写逻辑。
+
+###  全局异常处理
+拒绝在业务代码中写大量 try-catch，实现统一 JSON 返回。
+
+* **核心注解**：
+    * **`@RestControllerAdvice`**：全局捕获异常的切面类。
+    * **`@ExceptionHandler`**：指定处理哪种具体的异常（精确匹配优先）。
+* **处理流程**：
+    1.  定义统一返回对象 `Result<T>`。
+    2.  捕获 `MethodArgumentNotValidException` 处理参数校验失败。
+    3.  捕获自定义 `BusinessException` 处理业务逻辑错误。
+    4.  捕获 `Exception` 兜底未知错误。
+
+###  Web 容器 (Servlet Containers)
 * **Tomcat**
     * **定位**：Spring Boot 默认容器，成熟稳定，文档丰富。
     * **适用**：大多数传统的企业级 Web 应用。
@@ -12,9 +74,30 @@
     * **定位**：长连接专家，架构灵活。
     * **适用**：WebSocket、即时通讯 (IM)、聊天系统。
 
----
+### Spring Boot 如何启动 Tomcat？
+* **入口**：`SpringApplication.run()`。
+* **核心阶段**：`refreshContext()` (刷新上下文)。
+* **关键动作**：
+    * 在 `onRefresh()` 阶段。
+    * Spring Boot 检查应用类型是 Web 应用。
+    * 通过 `ServletWebServerFactory` **创建并启动** 内嵌的 Web 服务器（Tomcat）。
+    * **结论**：Tomcat 只是 Spring 容器中的一个 Bean。
 
-### 二、 Spring Boot 核心原理
+### Spring Bean 的生命周期
+描述一个对象从“出生”到“销毁”的过程：
+
+| 阶段 | 动作 | 详细说明 |
+| :--- | :--- | :--- |
+| **1. 实例化** | `Instantiation` | 通过反射 `new` 出对象，此时属性为空。 |
+| **2. 属性赋值** | `Populate` | 依赖注入（DI），填充 `@Autowired` 的属性。 |
+| **3. 初始化前** | `BPP Before` | `BeanPostProcessor` 的前置处理（扩展点）。 |
+| **4. 初始化** | `Initialization` | 执行 **`@PostConstruct`** 或 `afterPropertiesSet` 方法。 |
+| **5. 初始化后** | `BPP After` | **关键点**：`BeanPostProcessor` 的后置处理。**AOP 动态代理对象就是在这里生成的**。 |
+| **6. 使用中** | `Using` | 驻留在容器中，随时被调用。 |
+| **7. 销毁** | `Destruction` | 容器关闭时，执行 **`@PreDestroy`** 方法。 |
+
+
+###  Spring Boot 核心原理
 #### 1. 启动类注解 `@SpringBootApplication`
 它是一个复合注解，包含三个核心：
 * **`@SpringBootConfiguration`**：标识这是主配置类。
@@ -40,9 +123,8 @@
     * 开发时：在 `application.yml` 设置 `spring.profiles.active=dev`。
     * **生产时**：启动命令指定 `java -jar app.jar --spring.profiles.active=prod`。
 
----
 
-### 三、 Spring 常用注解体系
+###  Spring 常用注解体系
 #### 1. Bean 定义 (类级别)
 * **`@Component`**：通用组件（打杂的）。
 * **`@Repository`**：持久层/DAO（管仓库的），支持数据库异常翻译。
@@ -58,21 +140,8 @@
 * **`@PathVariable`**：获取 URL 路径参数 (`/user/{id}`)。
 * **`@RequestBody`**：获取 POST 请求体中的 JSON 数据，并自动映射为 Java 对象。
 
----
 
-### 四、 Spring 核心思想 (IOC & AOP)
-#### 1. IOC (控制反转) & DI (依赖注入)
-* **概念**：将对象的创建权和管理权从代码移交给 Spring 容器。
-* **目的**：**解耦**。修改依赖实现时无需修改业务代码，只需调整配置。
-
-#### 2. AOP (面向切面编程)
-* **概念**：将横切关注点（日志、事务、权限）与核心业务逻辑分离。
-* **实现**：基于动态代理（JDK 代理或 CGLIB）。
-* **应用**：声明式事务 (`@Transactional`) 是最典型的应用。
-
----
-
-### 五、 事务管理 (Transaction)
+###  事务管理 (Transaction)
 #### 1. 本地事务失效场景 (`@Transactional`)
 * **自调用**：同一类内部方法直接调用 (`this.method()`)，绕过了代理对象。
 * **异常被吞**：业务代码手动 `try-catch` 了异常且未抛出，AOP 无法捕获异常。
