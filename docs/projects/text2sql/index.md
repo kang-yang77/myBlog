@@ -1,4 +1,4 @@
-# 🚀 Smart SQL Pilot - 基于 RAG 的智能数据库助手
+#  Smart SQL Pilot - 基于 RAG 的智能数据库助手
 
 > **让数据查询像聊天一样简单。**
 >
