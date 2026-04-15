@@ -4,15 +4,16 @@ export default defineConfig({
   // ==========================================
   // 1. 站点核心配置
   // ==========================================
-  title: "Yang Kang", // 浏览器标签页标题
-  description: "Yang Kang 的个人博客，记录后端工程、AI 应用与长期写作",
+  title: "YK's log", // 浏览器标签页标题
+  description: "YK's log，记录后端工程、AI 应用与长期写作",
   base: '/',
   appearance: true,
 
   // 配置浏览器标签页的小图标 (Favicon)
   // 请确保 docs/public/favicon.ico 存在
   head: [
-    ['link', { rel: 'icon', href: '/favicon.ico' }]
+    ['link', { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico?v=20260415' }],
+    ['link', { rel: 'shortcut icon', type: 'image/x-icon', href: '/favicon.ico?v=20260415' }]
   ],
 
   // ==========================================
@@ -20,7 +21,7 @@ export default defineConfig({
   // ==========================================
   themeConfig: {
     // 左上角 Logo 和标题配置
-    siteTitle: 'Yang Kang', // 网站左上角文字
+    siteTitle: "YK's log", // 网站左上角文字
     // logo: '/logo.png',      // 网站左上角图标 (请确保 docs/public/logo.png 存在)
 
     // 顶部导航栏
