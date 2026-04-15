@@ -11,14 +11,14 @@ export interface BlogCatalogEntry {
 
 export const blogCatalog: BlogCatalogEntry[] = [
   {
-    title: '博客内容平台设计',
-    href: '/blogCreate/content-platform',
+    title: 'Agent基础',
+    href: '/posts/agent_2604',
     date: '2026-04-14',
     summary:
-      '把文章状态机、时间轴、多级分类、标签系统和背景配置整合成一套真正可落地的个人博客后端模型。',
-    category: 'Blog Engineering',
-    tags: ['Spring Boot', 'Architecture', 'CMS'],
-    readingTime: '9 min',
+      '尝试并总结了智能体Agent的相关理论',
+    category: 'DevOps',
+    tags: ['Agent', 'Agent设计模式', 'Agent评估','任务分解'],
+    readingTime: '5 min',
     featured: true
   },
   {
