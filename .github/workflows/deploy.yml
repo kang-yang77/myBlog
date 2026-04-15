@@ -43,5 +43,5 @@ jobs:
           SOURCE: "docs/.vitepress/dist/"
           REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
           REMOTE_USER: ${{ secrets.REMOTE_USER }}
-          TARGET: "/home/docker/nginx/html/blog/"
+          TARGET: "/home/docker/nginx/html"
           EXCLUDE: "/node_modules/"
