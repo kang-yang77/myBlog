@@ -14,3 +14,8 @@ dist/
 .DS_Store
 .idea/
 .vscode/
+
+# Java backend
+backend/target/
+backend/uploads/
+backend/data/

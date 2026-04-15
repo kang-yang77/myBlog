@@ -4,9 +4,10 @@ export default defineConfig({
   // ==========================================
   // 1. 站点核心配置
   // ==========================================
-  title: "ExitZero_", // 浏览器标签页标题
-  description: "Java 后端与 AI 的融合之路",
+  title: "Yang Kang", // 浏览器标签页标题
+  description: "Yang Kang 的个人博客，记录后端工程、AI 应用与长期写作",
   base: '/',
+  appearance: true,
 
   // 配置浏览器标签页的小图标 (Favicon)
   // 请确保 docs/public/favicon.ico 存在
@@ -19,22 +20,15 @@ export default defineConfig({
   // ==========================================
   themeConfig: {
     // 左上角 Logo 和标题配置
-    siteTitle: 'ExitZero_', // 网站左上角文字
+    siteTitle: 'Yang Kang', // 网站左上角文字
     // logo: '/logo.png',      // 网站左上角图标 (请确保 docs/public/logo.png 存在)
 
     // 顶部导航栏
     nav: [
-      { text: '首页', link: '/' },
-      { 
-        text: '实战项目', 
-        items: [
-          { text: '短链接系统', link: '/projects/short-link/index' },
-          { text: 'Text2SQL 助手', link: '/projects/text2sql/index' }
-        ]
-      },
-      { text: '算法心得', link: '/algorithm/index' },
-      { text: '基础知识', link: '/basics/index' },
-      { text: '博客搭建', link: '/blogCreate/index' }
+      { text: 'Posts', link: '/' },
+      { text: 'Archive', link: '/archive/index' },
+      { text: 'Tags', link: '/tags/index' },
+      { text: 'About', link: '/about/index' }
     ],
     // 社交链接
     socialLinks: [
@@ -46,9 +40,9 @@ export default defineConfig({
     
     // 页脚
     footer: {
-      message: 'Hello World!!.',
+      message: 'Writing as a way to think.',
       // 在 copyright 中使用 HTML 标签添加备案号并链接到工信部
-      copyright: 'Copyright © 2026 ExitZero | <a href="https://beian.miit.gov.cn/" target="_blank" rel="noreferrer">蜀ICP备2026002075号</a>'
+      copyright: 'Copyright © 2026 Yang Kang | <a href="https://beian.miit.gov.cn/" target="_blank" rel="noreferrer">蜀ICP备2026002075号</a>'
     }
   },
   

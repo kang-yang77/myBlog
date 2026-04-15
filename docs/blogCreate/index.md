@@ -1,5 +1,12 @@
 # VitePress + Docker + Nginx + GitHub Actions 全自动化部署指南
 
+## 这次博客升级新增了什么
+
+- [博客工作台](/studio/index)：站内完成 Markdown 编辑、草稿自动保存、封面图上传和状态机流转。
+- [发布看板](/journal/index)：展示已发布文章、分类聚合与视觉背景效果。
+- [发布时间线](/timeline/index)：汇总建站历程和文章发布动态。
+- [内容平台设计](/blogCreate/content-platform)：后端表结构、状态机和 API 设计。
+
 本文档总结了从零开始搭建博客、配置服务器环境、解决 SSH 密钥认证以及最终自动化部署的完整流程。
 
 ---
