@@ -1,12 +1,6 @@
 ## 什么是Agent?
 
-An **agentic AI workflow** is a process where an LLM-based app executes multiple steps to complete a task.
-
 代理型工作流程指的是LLM应用执行多步操作来完成任务
-
-How to take a complex task?
-
-Break it down into smaller steps for an agentic workflow to extcute one step at a time to then get the work what you want.
 
 将复杂的任务拆解成小的步骤来让Agent逐步执行来获得你想要的产出
 
@@ -18,11 +12,9 @@ Break it down into smaller steps for an agentic workflow to extcute one step at 
 
 **与其争论具有什么程度的智能的智能体算的上Agent，不如承认系统可以有不同程度的智能体性**
 
-1.自主性较低的系统，通常所有步骤都是提前设定好的，工具使用硬编码由工程师完成，自主性主要体现在LLM生成的文本内容上
-
-2.半自主性的智能体，可以做部分决策，选择工具，但是工具通常是预定义好的
-
-3.高度自主的智能体会做出许多决策，甚至编写新函数，创建新工具并执行
+1. 自主性较低的系统，通常所有步骤都是提前设定好的，工具使用硬编码由工程师完成，自主性主要体现在LLM生成的文本内容上
+2. 半自主性的智能体，可以做部分决策，选择工具，但是工具通常是预定义好的
+3. 高度自主的智能体会做出许多决策，甚至编写新函数，创建新工具并执行
 
 ## Agent的优势
 
@@ -82,8 +74,9 @@ tips：当把任务拆解为多个步骤时，问自己一个问题，如果看�
 
 作用：构建模块组合成更复杂的工作流
 
-1. Reflection(反思)
-	让LLM检查自己的输出，或者引入一些外部的信息来源
+### Reflection(反思)
+让LLM检查自己的输出，或者引入一些外部的信息来源
+```
 	Eg：
 	Me : Please write code for {task}
 	LLM1 : def do_task(x):...
@@ -91,14 +84,82 @@ tips：当把任务拆解为多个步骤时，问自己一个问题，如果看�
 	LLM1: def do_task(x)v2:...
 	Me:实际运行后发现bug，将错误信息反馈给LLM1
 	LLM1:def do_task(x)v3:...
+```
+外部信息能极大地提升大模型生成信息的质量，将代码输出和错误日志反馈给LLM，让它根据反馈反射并写新代码。
 
-	外部信息能极大地提升大模型生成信息的质量，将代码输出和错误日志反馈给LLM，让它根据反馈反射并写新代码。
+1. 零样本提示
+2. 单/少/多样本提示：在提示中加入一个或多个你期望的输出的示例
 
-2. Tool use（工具使用）
-	大模型可以被赋予工具，意思是它们可以调用函数来完成任务，LLM可以自主决定使用哪些工具
+**Tips**:提升写提示词的一个方法就是多阅读他人的提示词
 
-3. Planning（规划）
+#### 提示词示例
+
+**Code generation：**
+```
+Write pyhton code to generate a visualization that answers the user's question
+写一段pyhton代码生成一个可视化图表来回答用户的问题
+{user prompt}
+```
+**Reflection:**
+```
+你是一个数据分析专家角色，对可视化图表提供建设性反馈
+{v1 code} {plot.png} {conversation history}
+Step1：从可读性、清晰度、完整性方面批评这个图表
+Step2：编写新代码，实现你的改进建议
+```
+
+**思考**：为什么要将历史对话{conversation history}也传给Reflection模型？
+	- 核对是否答非所问，如果仅有代码和图片仅能判断是否美观
+	- 继承并遵循约束
+	- 避免陷入死循环或之前的坑
+	- 保持业务连贯性
+
+**Tips**：用推理型模型进行Reflection效果有时要比非推理型模型的效果更好
+
+#### 评估反射的影响
+
+###### 为什么要评估？
+	反射会让系统变慢，所以需要再次确认它实际提升了多少性能
+
+
+### Tool use（工具使用）
+	大模型可以被赋予工具，意思是它们可以调用函数来完成任务，LLM可以自主决定是否使用这些工具的任何一个
+	工具就是我们提供给大模型的函数，大模型选择要调用哪个函数，然后程序执行这个函数获得结果，再将这个结果返回给大模型。
+	并不是大模型直接调用了函数，而是大模型请求你去调用某个函数
+
+#### Egs：
+![](figs/p1.png)
+![](figs/p2.png)
+#### 创建工具：
+
+工具就是LLM可以请求执行的代码或函数
+
+##### Old Fashion：
+
+System prompt:
+```
+你有权限调用get_currnt_time这个工具，为了去使用它，严格返回以下格式的内容
+FUNCTION:
+get_current_time()
+```
+
+Function:
+```
+from datetime import datetime
+def get_current_time():
+	"""Returns the current time as a string"""
+	return datetime.now().strftime("%H:%M:%S")
+```
+![](figs/p4.png)
+
+##### Model Fashion：
+![](figs/p5.png)
+![](figs/p6.png)
+
+### Planning（规划）
 	在规划中，LLM会决定需要采用哪些行动顺序；具备规划能力的智能体更难控制，但有时能带来十分惊喜的结果
 
-4. Multi-agent collaboration（多智能体协作） 
+### Multi-agent collaboration（多智能体协作） 
 	多智能体配合工作，每个智能体可能专注于不同的角色
+
+
