@@ -11,6 +11,17 @@ export interface BlogCatalogEntry {
 
 export const blogCatalog: BlogCatalogEntry[] = [
   {
+    title: 'Harness Engineering 总结',
+    href: '/posts/agent_260420',
+    date: '2026-04-20',
+    summary:
+      '尝试总结了Harness Engineering相关概念',
+    category: 'DevOps',
+    tags: ['Harness', 'Spec Coding', '跨Agent同步'],
+    readingTime: '5 min',
+    featured: true
+  },
+  {
     title: 'Agent基础',
     href: '/posts/agent_2604',
     date: '2026-04-14',
