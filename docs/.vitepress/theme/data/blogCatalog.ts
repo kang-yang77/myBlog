@@ -109,6 +109,15 @@ export const blogCatalog: BlogCatalogEntry[] = [
     tags: ['KeePassXC', '密码管理', '安全'],
     readingTime: '5 min',
   },
+  {
+    title: '',
+    href: '/posts/2026-04-26-untitled',
+    date: '',
+    summary: '',
+    category: 'Notes',
+    tags: [],
+    readingTime: '5 min',
+  },
 ].sort((left, right) => right.date.localeCompare(left.date))
 
 export const catalogTags = Array.from(
