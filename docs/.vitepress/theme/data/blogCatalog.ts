@@ -11,6 +11,24 @@ export interface BlogCatalogEntry {
 
 export const blogCatalog: BlogCatalogEntry[] = [
   {
+    title: 'KeePassXC：本地密码保险柜，给你的 API Key 一个安全的家',
+    href: '/posts/20260426-keepassxc-local-password-vault-2',
+    date: '2026-04-26',
+    summary: 'KeePassXC 是一款免费开源的本地密码管理软件，可将 API Key、数据库密码等敏感信息高强度加密存储为 .kdbx 文件，完全离线、不联网，从物理层面杜绝泄露。本文介绍其核心优势与三步使用流程。',
+    category: 'DevOps',
+    tags: ['KeePassXC', '密码管理', '安全', 'API Key', '开源工具', '本地加密'],
+    readingTime: '5 min',
+  },
+  {
+    title: 'KeePassXC：本地密码保险柜',
+    href: '/posts/20260426-keepassxc-local-password-vault',
+    date: '2026-04-26',
+    summary: 'KeePassXC 是一款免费、开源且跨平台的本地密码管理软件，能安全地存储 API Key、数据库密码等敏感信息。本文介绍其核心优势与三步使用流程，助你打造离线密码保险柜。',
+    category: 'DevOps',
+    tags: ['KeePassXC', '密码管理', '安全', '开源', 'DevOps'],
+    readingTime: '4 min',
+  },
+  {
     title: 'Harness Engineering 总结',
     href: '/posts/agent_260420',
     date: '2026-04-20',
