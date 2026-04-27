@@ -10,21 +10,21 @@ jobs:
     steps:
       # 1. 拉取代码
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           fetch-depth: 0
 
       # 2. 安装 pnpm
       - name: Install pnpm
-        uses: pnpm/action-setup@v4
+        uses: pnpm/action-setup@v6
         with:
           version: 9
 
-      # 3. 设置 Node 环境 (关键修改：禁用了缓存！)
+      # 3. 设置 Node 环境
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
-          node-version: '20'
+          node-version: '24'
           # cache: 'pnpm'  <-- ⚠️ 这一行被注释掉了，为了强制修复缓存报错，请不要解开！
 
       # 4. 安装依赖并构建
