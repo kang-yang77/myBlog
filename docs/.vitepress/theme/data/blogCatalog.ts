@@ -100,6 +100,15 @@ export const blogCatalog: BlogCatalogEntry[] = [
     tags: ['KeePassXC', '密码管理', '安全'],
     readingTime: '5 min',
   },
+  {
+    title: 'Docker 容器化部署实践',
+    href: '/posts/2026-04-26-docker-containerization-best-practices',
+    date: '2026-04-26',
+    summary: '总结 Docker 部署应用时的关键最佳实践，包括镜像优化、多阶段构建、数据持久化和单进程原则。',
+    category: 'DevOps',
+    tags: ['Docker', '容器化', '部署', '最佳实践'],
+    readingTime: '4 min',
+  },
 ].sort((left, right) => right.date.localeCompare(left.date))
 
 export const catalogTags = Array.from(
