@@ -90,7 +90,7 @@ export const blogCatalog: BlogCatalogEntry[] = [
     category: 'Notes',
     tags: ['Spring', 'MySQL', 'Backend Notes'],
     readingTime: '10 min'
-  }
+  },
   {
     title: 'KeePassXC：本地密码保险柜',
     href: '/posts/2026-04-26-keepassxc-local-password-vault',
@@ -98,24 +98,6 @@ export const blogCatalog: BlogCatalogEntry[] = [
     summary: 'KeePassXC 是一款免费开源的本地密码管理软件，可将 API Key 等敏感信息高强度加密存储。',
     category: 'DevOps',
     tags: ['KeePassXC', '密码管理', '安全'],
-    readingTime: '5 min',
-  },
-  {
-    title: '',
-    href: '/posts/2026-04-26-untitled',
-    date: '',
-    summary: '',
-    category: 'Notes',
-    tags: [],
-    readingTime: '5 min',
-  },
-  {
-    title: '',
-    href: '/posts/2026-04-27-untitled',
-    date: '',
-    summary: '',
-    category: 'Notes',
-    tags: [],
     readingTime: '5 min',
   },
 ].sort((left, right) => right.date.localeCompare(left.date))
