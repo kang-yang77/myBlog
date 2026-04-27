@@ -92,15 +92,6 @@ export const blogCatalog: BlogCatalogEntry[] = [
     readingTime: '10 min'
   },
   {
-    title: 'KeePassXC：本地密码保险柜',
-    href: '/posts/2026-04-26-keepassxc-local-password-vault',
-    date: '2026-04-26',
-    summary: 'KeePassXC 是一款免费开源的本地密码管理软件，可将 API Key 等敏感信息高强度加密存储。',
-    category: 'DevOps',
-    tags: ['KeePassXC', '密码管理', '安全'],
-    readingTime: '5 min',
-  },
-  {
     title: 'Docker 容器化部署实践',
     href: '/posts/2026-04-26-docker-containerization-best-practices',
     date: '2026-04-26',
