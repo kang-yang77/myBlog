@@ -11,7 +11,7 @@ export interface BlogCatalogEntry {
 
 export const blogCatalog: BlogCatalogEntry[] = [
   {
-    title: 'KeePassXC：本地密码保险柜，给你的 API Key 一个安全的家',
+    title: 'KeePassXC：本地密码保险柜',
     href: '/posts/20260426-keepassxc-local-password-vault-2',
     date: '2026-04-26',
     summary: 'KeePassXC 是一款免费开源的本地密码管理软件，可将 API Key、数据库密码等敏感信息高强度加密存储为 .kdbx 文件，完全离线、不联网，从物理层面杜绝泄露。本文介绍其核心优势与三步使用流程。',
