@@ -100,6 +100,15 @@ export const blogCatalog: BlogCatalogEntry[] = [
     tags: ['Docker', '容器化', '部署', '最佳实践'],
     readingTime: '4 min',
   },
+  {
+    title: '测试文档',
+    href: '/posts/2026-04-27-post-20260427-100731',
+    date: '2026-04-27',
+    summary: 'title: 测试文档 date: 2025 04 10 slug: test document summary: 这是一篇用于测试的文档，内容为占位符。 category: Notes tags: test placeholder...',
+    category: 'Notes',
+    tags: [],
+    readingTime: '1 min',
+  },
 ].sort((left, right) => right.date.localeCompare(left.date))
 
 export const catalogTags = Array.from(
